@@ -2,7 +2,7 @@ import os
 import csv
 
 #Path to collect the data from
-pybank_csv = os.path.join("..", "Resources", "budget_data.csv")
+pybank_csv = os.path.join("Resources", "budget_data.csv")
 
 #Define variables
 months = 0
@@ -60,6 +60,7 @@ with open(pybank_csv, newline = '') as csvfile:
 
  #Print values 
     print("Financial Analysis")
+    print("--------------------------")
     print("Total Months:" + " " + str(months))
     print("Total:" + " " + "$" + str(profit))
     print("Average Change:" +"$" + " " + str(int(average_change)))
