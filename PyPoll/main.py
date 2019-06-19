@@ -18,7 +18,8 @@ with open(pypoll_csv, newline="") as csvfile:
         #Add cast_votes and candidate data
           cast_votes.append(row[0])
           candidate.append(row[2])
-           
+
+#Calculate total votes         
 total_votes = len(cast_votes)
 
 
@@ -26,12 +27,17 @@ total_votes = len(cast_votes)
 candidate_name = candidate
 counter_1 = Counter(candidate_name)
 
-print(f"TotalVotes:  {total_votes}")
 print("Election Results")
 print("-------------------------") 
 print("Total Votes:" + " " + str(total_votes))
-print("-------------------------")
+print("-------------------------")  
 
+#Write output to text file
+analysis = open('election_results.txt', 'w')
+analysis.write("Election Results\n")
+analysis.write("---------------------------------\n") 
+analysis.write("Total Votes:" + " " + str(total_votes) + "\n")
+analysis.write("---------------------------------\n")  
 
 #Calculate the % of votes for candidates
 percent_list=[]
@@ -39,21 +45,17 @@ for key,value in counter_1.items():
   percent_votes =round((value/total_votes)*100, 2)
   percent_list.append(percent_votes)
   print(f"{key}: {(percent_votes):.3f} % ({value})  " )
-  
+  analysis.write(f'{key}: {(percent_votes):.3f} % ({value})  \n' )
+
+     
+#Calculate candidate with max number of votes 
 max_value = max(counter_1.values())
 max_keys = [k for k, v in counter_1.items() if v == max_value]
 print("--------------------------")
 print(f"Winner: {max_keys}")
 print("--------------------------")
+analysis.write("---------------------------------\n")
+analysis.write("Winner:" + " " + str(max_keys) + "\n") 
+analysis.write("---------------------------------\n")   
+analysis.close() 
 
-
-#Write output to txt file
-with open ('election_results.txt', 'w') as text:
-  text.write("Election Results\n")
-  text.write("---------------------------------------\n") 
-  text.write("Total Votes:" + " " + str(total_votes) + "\n")
-  text.write("---------------------------------------\n")  
-  text.write(f'{key}: {(percent_votes):.3f} % ({value})  \n' )
-  text.write("---------------------------------------\n")
-  text.write("Winner:" + " " + str(max_keys) + "\n") 
-  text.write("---------------------------------------\n")    
