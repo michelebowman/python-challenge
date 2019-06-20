@@ -37,7 +37,7 @@ with open(pybank_csv, newline = '') as csvfile:
         difference = int(row[1]) - old_profit
         differences.append(difference)
 
- #Count month total from prior month's profit        
+ #Count month total from difference in month over month        
         old_profit = int(row[1])
         month_count.append(row[0])
 
